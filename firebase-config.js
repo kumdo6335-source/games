@@ -1,12 +1,12 @@
 // Firebase configuration
 // 실제 Firebase 프로젝트의 설정값으로 교체해주세요.
 export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCP3OOt5av46HDAuZXRqpqDbR97g5GHFyM",
+  authDomain: "games-17d89.firebaseapp.com",
+  projectId: "games-17d89",
+  storageBucket: "games-17d89.firebasestorage.app",
+  messagingSenderId: "581854800338",
+  appId: "1:581854800338:web:77f30c9feb84a5ab9a400b"
 };
 
 // Firebase 설정이 유효한지 검사하는 유틸리티
