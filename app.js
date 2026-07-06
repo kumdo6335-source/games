@@ -1,5 +1,8 @@
 import { firebaseConfig, isFirebaseConfigured } from './firebase-config.js';
 
+// 관리자 이메일 설정
+const ADMIN_EMAIL = 'kumdo6335@gmail.com';
+
 // State Variables
 let isDemoMode = true;
 let currentUser = null;
@@ -67,6 +70,7 @@ async function initApp() {
         if (user) {
           currentUser = {
             uid: user.uid,
+            email: user.email,
             name: user.displayName || '선생님',
             photoURL: user.photoURL || 'https://api.dicebear.com/7.x/adventurer/svg?seed=teacher'
           };
@@ -176,6 +180,7 @@ async function handleLogin() {
     // Show a simple mock login
     currentUser = {
       uid: 'demo-user-123',
+      email: ADMIN_EMAIL,
       name: '행복한 선생님 🍎',
       photoURL: 'https://api.dicebear.com/7.x/adventurer/svg?seed=happyTeacher'
     };
@@ -275,8 +280,8 @@ function renderCards() {
       brain: '🧠 두뇌/보드'
     };
 
-    // Check if the user is authorized to edit/delete (in demo mode anyone logged in, in firebase mode anyone logged in can manage)
-    const canManage = currentUser !== null;
+    // Check if the user is authorized to edit/delete
+    const canManage = currentUser && currentUser.email === ADMIN_EMAIL;
 
     card.innerHTML = `
       <div class="card-header">
@@ -307,8 +312,8 @@ function renderCards() {
     cardsGrid.appendChild(card);
   });
 
-  // If user is logged in, show the "Add New Link" card at the end
-  if (currentUser) {
+  // If user is logged in as admin, show the "Add New Link" card at the end
+  if (currentUser && currentUser.email === ADMIN_EMAIL) {
     const addCard = document.createElement('div');
     addCard.className = 'play-card add-card-trigger';
     addCard.innerHTML = `
@@ -379,8 +384,8 @@ function closeModal() {
 async function handleFormSubmit(e) {
   e.preventDefault();
   
-  if (!currentUser) {
-    showToast('로그인이 필요합니다.');
+  if (!currentUser || currentUser.email !== ADMIN_EMAIL) {
+    showToast('관리자만 작성 및 수정할 수 있습니다.');
     return;
   }
 
