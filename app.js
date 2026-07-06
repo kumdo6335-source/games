@@ -249,6 +249,11 @@ async function loadPlays() {
       onSnapshot(q, (snapshot) => {
         playsList = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
         renderCards();
+      }, (error) => {
+        console.error('Firestore 권한/읽기 에러:', error);
+        showToast('데이터베이스 권한이 없습니다. Firebase 규칙을 확인해주세요.');
+        // 에러가 나도 관리자가 추가 버튼은 볼 수 있도록 렌더링 시도
+        renderCards();
       });
     } catch (error) {
       console.error('Firestore 읽기 에러:', error);
