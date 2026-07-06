@@ -75,7 +75,7 @@ async function initApp() {
             photoURL: user.photoURL || 'https://api.dicebear.com/7.x/adventurer/svg?seed=teacher'
           };
           updateAuthUI(true);
-          showToast(`어서오세요, ${currentUser.name}님! 👋`);
+          showToast(`어서오세요! (로그인 계정: ${currentUser.email}) 👋`);
         } else {
           currentUser = null;
           updateAuthUI(false);
@@ -281,7 +281,7 @@ function renderCards() {
     };
 
     // Check if the user is authorized to edit/delete
-    const canManage = currentUser && currentUser.email === ADMIN_EMAIL;
+    const canManage = currentUser && currentUser.email && currentUser.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
 
     card.innerHTML = `
       <div class="card-header">
@@ -313,7 +313,7 @@ function renderCards() {
   });
 
   // If user is logged in as admin, show the "Add New Link" card at the end
-  if (currentUser && currentUser.email === ADMIN_EMAIL) {
+  if (currentUser && currentUser.email && currentUser.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
     const addCard = document.createElement('div');
     addCard.className = 'play-card add-card-trigger';
     addCard.innerHTML = `
@@ -384,7 +384,7 @@ function closeModal() {
 async function handleFormSubmit(e) {
   e.preventDefault();
   
-  if (!currentUser || currentUser.email !== ADMIN_EMAIL) {
+  if (!currentUser || !currentUser.email || currentUser.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
     showToast('관리자만 작성 및 수정할 수 있습니다.');
     return;
   }
