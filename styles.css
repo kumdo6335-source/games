@@ -82,35 +82,163 @@ body {
   box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
 }
 
+.chalk-title {
+  padding: 0 180px;
+}
+
 /* Chalk text effect */
 .chalk-title h1 {
-  font-size: 2.2rem;
+  font-family: 'Gaegu', cursive;
+  font-size: 2.4rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   margin-bottom: 10px;
-  text-shadow: 0 0 2px rgba(255,255,255,0.4), 2px 2px 3px rgba(0,0,0,0.3);
+  color: var(--chalkboard-chalk);
+  text-shadow: 0 0 1px rgba(255,255,255,0.7), 0 0 6px rgba(255,255,255,0.35), 1px 1px 1px rgba(0,0,0,0.25);
+  filter: url(#chalkTexture);
 }
 
 .chalk-subtitle {
-  font-size: 1.1rem;
+  font-family: 'Gaegu', cursive;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
   color: var(--chalkboard-chalk-yellow);
-  text-shadow: 0 0 2px rgba(254, 240, 138, 0.4);
+  text-shadow: 0 0 1px rgba(254, 240, 138, 0.8), 0 0 5px rgba(254, 240, 138, 0.4);
+  filter: url(#chalkTexture);
 }
 
 .chalkboard-decor {
   position: absolute;
-  font-size: 2.5rem;
   top: 50%;
   transform: translateY(-50%);
-  opacity: 0.85;
+  opacity: 0.92;
 }
 
 .chalkboard-decor.left {
-  left: 20px;
+  left: 22px;
 }
 
 .chalkboard-decor.right {
-  right: 20px;
+  right: 22px;
+}
+
+/* 왼쪽 장식: 분필 & 칠판 지우개 (CSS로 직접 그림) */
+.chalk-eraser-art {
+  position: relative;
+  width: 92px;
+  height: 70px;
+}
+
+.chalk-eraser-art .eraser {
+  position: absolute;
+  bottom: 4px;
+  left: 10px;
+  width: 50px;
+  transform: rotate(-6deg);
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.35));
+}
+
+.chalk-eraser-art .eraser-wood {
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(180deg, #d3a06c, #a9703a);
+  border-radius: 3px 3px 0 0;
+  border: 1px solid #7a4e26;
+  border-bottom: none;
+}
+
+.chalk-eraser-art .eraser-felt {
+  width: 100%;
+  height: 17px;
+  background: repeating-linear-gradient(90deg, #6b7280, #6b7280 3px, #4b5563 3px, #4b5563 6px);
+  border-radius: 0 0 4px 4px;
+  border: 1px solid #374151;
+  border-top: none;
+  box-shadow: inset 0 -3px 4px rgba(0, 0, 0, 0.35);
+}
+
+.chalk-eraser-art .chalk-stick {
+  position: absolute;
+  width: 32px;
+  height: 10px;
+  border-radius: 4px;
+  box-shadow: inset 0 -2px 2px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.chalk-eraser-art .chalk-white {
+  background: #f9fafb;
+  top: 10px;
+  left: 34px;
+  transform: rotate(20deg);
+}
+
+.chalk-eraser-art .chalk-yellow {
+  background: var(--chalkboard-chalk-yellow);
+  top: 26px;
+  left: 8px;
+  transform: rotate(-22deg);
+}
+
+.chalk-eraser-art .chalk-pink {
+  background: #fbcfe8;
+  top: -2px;
+  left: 4px;
+  transform: rotate(10deg);
+}
+
+/* 오른쪽 장식: 칠판에 분필로 적은 시간표 */
+.chalk-timetable {
+  width: 155px;
+  font-family: 'Gaegu', cursive;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.chalk-timetable .timetable-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 3px;
+  margin-bottom: 4px;
+  color: var(--chalkboard-chalk);
+  filter: url(#chalkTexture);
+}
+
+.chalk-timetable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.chalk-timetable th,
+.chalk-timetable td {
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  padding: 3px 2px;
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 400;
+}
+
+.chalk-timetable th {
+  color: var(--chalkboard-chalk-yellow);
+  font-weight: 700;
+}
+
+.chalk-timetable td:first-child {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media (max-width: 700px) {
+  .chalkboard-decor.left,
+  .chalkboard-decor.right {
+    display: none;
+  }
+
+  .chalk-title {
+    padding: 0;
+  }
+
+  .chalk-title h1 {
+    font-size: 1.7rem;
+  }
 }
 
 /* Desk Toolbar (책상 위 도구바) */
